@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tama Motors — Car Wash & Location de véhicules · Polynésie française</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:        #0a0a0b;
+    --bg-2:      #101012;
+    --bg-3:      #161618;
+    --card:      #161617;
+    --card-2:    #1c1c1f;
+    --line:      rgba(255,255,255,0.08);
+    --line-2:    rgba(255,255,255,0.14);
+    --text:      #f4f1ea;
+    --muted:     #9c9a93;
+    --muted-2:   #6e6c66;
+    --gold:      #f2b647;
+    --gold-2:    #e8941e;
+    --gold-soft: rgba(242,182,71,0.14);
+    --grad-gold: linear-gradient(105deg,#f9cf6a 0%,#f2b647 38%,#e8941e 100%);
+    --maxw:      1240px;
+    --ease:      cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Manrope",system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:#1a1305}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  input,textarea,select{font-family:inherit}
+
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+  .display{
+    font-family:"Archivo",sans-serif;
+    font-weight:900;
+    letter-spacing:-0.03em;
+    line-height:0.92;
+    text-transform:uppercase;
+  }
+  .eyebrow{
+    font-family:"Archivo",sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";width:24px;height:1px;background:var(--gold);opacity:.6;
+  }
+  .gold-text{
+    background:var(--grad-gold);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+  }
+
+  /* ============ topographic / wave motif (subtle Polynesian) ============ */
+  .topo{
+    position:absolute;inset:0;z-index:0;pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600' viewBox='0 0 1200 600'%3E%3Cg fill='none' stroke='%23f2b647' stroke-width='1' stroke-opacity='0.07'%3E%3Cpath d='M-50 120 Q 300 40 600 120 T 1250 120'/%3E%3Cpath d='M-50 170 Q 300 90 600 170 T 1250 170'/%3E%3Cpath d='M-50 220 Q 300 140 600 220 T 1250 220'/%3E%3Cpath d='M-50 270 Q 300 190 600 270 T 1250 270'/%3E%3Cpath d='M-50 320 Q 300 240 600 320 T 1250 320'/%3E%3Cpath d='M-50 370 Q 300 290 600 370 T 1250 370'/%3E%3Cpath d='M-50 420 Q 300 340 600 420 T 1250 420'/%3E%3Cpath d='M-50 470 Q 300 390 600 470 T 1250 470'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:cover;
+  }
+
+  /* ===================== NAV ===================== */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    transition:background .4s var(--ease),border-color .4s var(--ease),backdrop-filter .4s;
+    border-bottom:1px solid transparent;
+  }
+  header.nav.scrolled{
+    background:rgba(10,10,11,0.78);
+    backdrop-filter:blur(16px) saturate(120%);
+    -webkit-backdrop-filter:blur(16px) saturate(120%);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:72px;
+  }
+  .logo{
+    display:flex;align-items:center;gap:11px;
+    font-family:"Archivo",sans-serif;font-weight:900;
+    letter-spacing:-0.02em;line-height:.92;font-size:18px;text-transform:uppercase;
+  }
+  .logo .mark{
+    width:34px;height:34px;border-radius:9px;flex:none;
+    background:var(--grad-gold);
+    display:grid;place-items:center;
+    box-shadow:0 4px 18px rgba(232,148,30,.35);
+  }
+  .logo .mark svg{width:20px;height:20px}
+  .logo span b{color:var(--gold);font-weight:900}
+
+  .nav-tabs{
+    display:none;
+    align-items:center;gap:4px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid var(--line);
+    padding:5px;border-radius:999px;
+  }
+  .nav-tabs a{
+    font-weight:700;font-size:14px;
+    padding:9px 18px;border-radius:999px;
+    color:var(--muted);
+    transition:color .25s,background .25s;
+    white-space:nowrap;
+  }
+  .nav-tabs a:hover{color:var(--text)}
+  .nav-tabs a.active{
+    color:#1a1305;background:var(--grad-gold);
+    box-shadow:0 2px 14px rgba(232,148,30,.3);
+  }
+
+  .nav-cta{
+    display:none;
+    font-weight:700;font-size:14px;
+    padding:11px 20px;border-radius:999px;
+    border:1px solid var(--line-2);
+    color:var(--text);
+    transition:border-color .25s,background .25s;
+  }
+  .nav-cta:hover{border-color:var(--gold);background:var(--gold-soft)}
+
+  .burger{
+    display:flex;flex-direction:column;gap:5px;
+    width:44px;height:44px;align-items:center;justify-content:center;
+    border-radius:11px;border:1px solid var(--line);
+    background:rgba(255,255,255,0.03);
+  }
+  .burger span{width:18px;height:2px;background:var(--text);border-radius:2px;transition:transform .3s,opacity .3s}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* mobile menu */
+  .mobile-menu{
+    position:fixed;inset:0;z-index:99;
+    background:rgba(8,8,9,0.97);
+    backdrop-filter:blur(8px);
+    display:flex;flex-direction:column;justify-content:center;gap:6px;
+    padding:0 26px;
+    opacity:0;visibility:hidden;transform:translateY(-12px);
+    transition:opacity .35s var(--ease),transform .35s var(--ease),visibility .35s;
+  }
+  .mobile-menu.open{opacity:1;visibility:visible;transform:translateY(0)}
+  .mobile-menu a{
+    font-family:"Archivo",sans-serif;font-weight:800;text-transform:uppercase;
+    font-size:34px;letter-spacing:-.02em;
+    padding:14px 0;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+    color:var(--text);
+  }
+  .mobile-menu a .num{font-size:13px;color:var(--gold);font-family:"Manrope";letter-spacing:.1em}
+  .mobile-menu .mm-cta{
+    margin-top:28px;border:none;border-radius:14px;
+    background:var(--grad-gold);color:#1a1305;
+    font-size:17px;justify-content:center;padding:18px;
+  }
+
+  /* ===================== HERO ===================== */
+  .hero{
+    position:relative;
+    padding:118px 0 56px;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(120% 90% at 80% -10%, rgba(232,148,30,.18), transparent 55%),
+      radial-gradient(90% 80% at 0% 110%, rgba(242,182,71,.08), transparent 60%);
+  }
+  .hero .wrap{position:relative;z-index:2}
+
+  .hero-head{
+    display:flex;flex-direction:column;gap:22px;
+  }
+  .hero h1{
+    font-size:clamp(52px,15vw,150px);
+  }
+  .hero h1 .line2{display:block}
+  .hero-sub{
+    font-size:clamp(16px,4.2vw,20px);
+    color:var(--muted);max-width:540px;line-height:1.55;
+  }
+  .hero-sub b{color:var(--text);font-weight:700}
+
+  .hero-actions{
+    display:flex;flex-wrap:wrap;gap:14px;margin-top:6px;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:12px;
+    font-weight:700;font-size:15px;
+    padding:16px 26px;border-radius:14px;
+    transition:transform .2s var(--ease),box-shadow .25s,background .25s,border-color .25s;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn-gold{
+    background:var(--grad-gold);color:#1a1305;
+    box-shadow:0 10px 34px rgba(232,148,30,.32);
+  }
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 44px rgba(232,148,30,.44)}
+  .btn-gold svg{transition:transform .25s}
+  .btn-gold:hover svg{transform:translateX(5px)}
+  .btn-ghost{
+    border:1px solid var(--line-2);color:var(--text);
+  }
+  .btn-ghost:hover{border-color:var(--gold);background:var(--gold-soft)}
+
+  /* hero showcase placeholder */
+  .hero-stage{
+    position:relative;margin-top:48px;
+    border-radius:24px;overflow:hidden;
+    border:1px solid var(--line);
+    background:
+      radial-gradient(120% 130% at 70% 0%, #2a2118 0%, #18130d 40%, #0d0c0b 100%);
+    min-height:340px;
+    display:flex;align-items:flex-end;
+    box-shadow:0 40px 90px -40px rgba(0,0,0,.9);
+  }
+  .hero-stage .topo{opacity:.7}
+  .hero-stage .ph-car{
+    position:absolute;inset:0;z-index:1;
+    display:grid;place-items:center;
+  }
+  .car-silhouette{
+    width:min(76%,620px);height:auto;
+    filter:drop-shadow(0 30px 40px rgba(0,0,0,.6));
+    opacity:.92;
+  }
+  .hero-stage .stage-label{
+    position:relative;z-index:3;
+    margin:0 18px 18px;
+    font-family:"Archivo",monospace;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted-2);
+  }
+  .hero-stage .glow-floor{
+    position:absolute;left:50%;bottom:6%;transform:translateX(-50%);
+    width:60%;height:34px;border-radius:50%;z-index:0;
+    background:radial-gradient(ellipse,rgba(242,182,71,.4),transparent 70%);
+    filter:blur(14px);
+  }
+  .hero-chips{
+    position:absolute;top:18px;left:18px;z-index:4;
+    display:flex;flex-direction:column;gap:9px;align-items:flex-start;
+  }
+  .chip{
+    display:inline-flex;align-items:center;gap:9px;
+    background:rgba(14,14,15,.72);
+    border:1px solid var(--line-2);
+    backdrop-filter:blur(6px);
+    padding:8px 14px;border-radius:999px;
+    font-size:12.5px;font-weight:600;
+  }
+  .chip .dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+
+  /* stats strip */
+  .stats{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+    margin-top:42px;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    background:var(--line);
+  }
+  .stat{
+    background:var(--bg);padding:22px 20px;
+  }
+  .stat .num{font-family:"Archivo";font-weight:800;font-size:30px;letter-spacing:-.02em}
+  .stat .num .gold-text{font-weight:900}
+  .stat .lbl{color:var(--muted);font-size:12.5px;margin-top:4px;letter-spacing:.02em}
+
+  /* ===================== SECTION SHELL ===================== */
+  section.block{position:relative;padding:84px 0;scroll-margin-top:92px}
+  .sec-head{display:flex;flex-direction:column;gap:16px;margin-bottom:42px;max-width:680px}
+  .sec-head h2{font-size:clamp(34px,9vw,68px)}
+  .sec-head p{color:var(--muted);font-size:16.5px;line-height:1.6}
+
+  .section-tint-wash{background:
+    linear-gradient(180deg,transparent,rgba(20,17,12,.5) 50%,transparent),var(--bg);}
+
+  /* ===================== CAR WASH — category cards ===================== */
+  .wcat-grid{
+    display:grid;grid-template-columns:1fr;gap:14px;
+  }
+  .wcard{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:22px 22px 20px;
+    display:flex;flex-direction:column;gap:20px;
+    transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;
+    overflow:hidden;
+    cursor:pointer;
+    text-align:left;width:100%;color:inherit;
+  }
+  .wcard::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:var(--grad-gold);transform:scaleY(0);transform-origin:top;
+    transition:transform .35s var(--ease);
+  }
+  .wcard:hover,.wcard:focus-visible{transform:translateY(-5px);border-color:var(--line-2);box-shadow:0 24px 50px -34px rgba(0,0,0,.85);outline:none}
+  .wcard:hover::before,.wcard:focus-visible::before{transform:scaleY(1)}
+  .wcard-head{display:flex;flex-direction:column;gap:6px}
+  .wcard-name{font-family:"Archivo";font-weight:800;font-size:19px;letter-spacing:-.01em;color:var(--text);line-height:1.1}
+  .wcard-models{
+    font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);
+  }
+  .wcard-prices{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto;
+  }
+  .wprice{
+    display:flex;flex-direction:column;gap:5px;
+    background:var(--bg-2);border:1px solid var(--line);border-radius:12px;
+    padding:13px 13px 12px;
+  }
+  .wprice-lbl{
+    font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  }
+  .wprice-val{font-family:"Archivo";font-weight:900;font-size:20px;letter-spacing:-.02em;color:var(--text);line-height:1}
+  .wprice-val small{font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:0;margin-left:1px}
+  .wprice.is-complet{
+    background:radial-gradient(130% 130% at 50% 0%, rgba(232,148,30,.2), transparent 70%),rgba(242,182,71,.05);
+    border-color:rgba(242,182,71,.4);
+  }
+  .wprice.is-complet .wprice-lbl{color:var(--gold)}
+  .wprice.is-complet .wprice-val{color:var(--gold)}
+  .wprice.is-complet .wprice-val small{color:rgba(242,182,71,.7)}
+
+  /* discreet note under the grid */
+  .wash-note{
+    margin-top:24px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;
+    padding:16px 20px;border:1px dashed var(--line-2);border-radius:14px;
+    background:rgba(255,255,255,.012);
+  }
+  .wash-note .wn-lead{font-family:"Archivo";font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  .wash-note .wn-sep{width:4px;height:4px;border-radius:50%;background:var(--muted-2)}
+  .wash-note .wn-item{font-size:13px;color:var(--muted);font-weight:500}
+  .wash-note .wn-item b{color:#d4d1ca;font-weight:700}
+
+  /* ===================== LOCATION GRID ===================== */
+  .loc-toolbar{
+    display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;
+  }
+  .filter{
+    font-size:13.5px;font-weight:700;
+    border:1px solid var(--line);border-radius:999px;
+    padding:9px 16px;color:var(--muted);
+    background:rgba(255,255,255,.02);
+    transition:color .2s,border-color .2s,background .2s;
+  }
+  .filter:hover{color:var(--text);border-color:var(--line-2)}
+  .filter.active{color:#1a1305;background:var(--grad-gold);border-color:transparent}
+
+  .fleet{
+    display:grid;grid-template-columns:1fr;gap:18px;
+  }
+  .vcard{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:transform .35s var(--ease),border-color .35s,box-shadow .35s;
+  }
+  .vcard:hover{transform:translateY(-5px);border-color:var(--line-2);box-shadow:0 26px 60px -36px rgba(0,0,0,.85)}
+  .vcard-media{
+    position:relative;aspect-ratio:16/10;
+    background:radial-gradient(120% 130% at 60% 10%, #232227 0%, #161518 50%, #0e0d0f 100%);
+    display:grid;place-items:center;overflow:hidden;
+  }
+  .vcard-media .topo{opacity:.45}
+  .vcard-media .glow-floor{
+    position:absolute;left:50%;bottom:10%;transform:translateX(-50%);
+    width:62%;height:26px;border-radius:50%;
+    background:radial-gradient(ellipse,rgba(242,182,71,.22),transparent 70%);filter:blur(12px);
+  }
+  .vcard-media svg.car{width:74%;position:relative;z-index:2;filter:drop-shadow(0 22px 26px rgba(0,0,0,.55))}
+  .vcat{
+    position:absolute;top:13px;left:13px;z-index:3;
+    font-family:"Archivo";font-weight:800;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    background:rgba(10,10,11,.7);border:1px solid var(--line-2);backdrop-filter:blur(6px);
+    color:var(--gold);padding:6px 11px;border-radius:999px;
+  }
+  .vph-tag{
+    position:absolute;bottom:11px;right:13px;z-index:3;
+    font-family:"Archivo",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted-2);
+  }
+  .vcard-body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:16px}
+  .vcard-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .vcard-top h3{font-family:"Archivo";font-weight:800;font-size:20px;letter-spacing:-.01em}
+  .vcard-top .sub{color:var(--muted);font-size:12.5px;margin-top:2px}
+  .vprice{text-align:right;flex:none}
+  .vprice .amt{font-family:"Archivo";font-weight:900;font-size:24px;letter-spacing:-.02em}
+  .vprice .amt small{font-size:14px;color:var(--muted);font-weight:700}
+  .vprice .per{color:var(--muted);font-size:11.5px}
+  .vspecs{display:flex;flex-wrap:wrap;gap:8px}
+  .spec{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:12.5px;font-weight:600;color:#cdcac3;
+    background:rgba(255,255,255,.03);border:1px solid var(--line);
+    padding:7px 12px;border-radius:9px;
+  }
+  .spec svg{width:14px;height:14px;opacity:.85}
+  .vcard .btn{justify-content:center;width:100%;padding:14px}
+
+  /* ===================== CONTACT ===================== */
+  .contact-grid{display:grid;grid-template-columns:1fr;gap:30px}
+  .contact-aside{display:flex;flex-direction:column;gap:18px}
+  .contact-card{
+    background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:22px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .contact-card .ic{
+    width:46px;height:46px;border-radius:12px;flex:none;
+    background:var(--gold-soft);border:1px solid rgba(242,182,71,.3);
+    display:grid;place-items:center;color:var(--gold);
+  }
+  .contact-card .ic svg{width:22px;height:22px}
+  .contact-card h4{font-family:"Archivo";font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .contact-card .big{font-size:19px;font-weight:700;color:var(--text)}
+  .contact-card .small{font-size:13.5px;color:var(--muted)}
+
+  form.contact-form{
+    background:
+      radial-gradient(120% 80% at 100% 0%, rgba(232,148,30,.08), transparent 50%),
+      var(--card);
+    border:1px solid var(--line);border-radius:22px;padding:26px 24px;
+    display:flex;flex-direction:column;gap:18px;
+  }
+  .field{display:flex;flex-direction:column;gap:8px}
+  .field label{font-size:12.5px;font-weight:700;letter-spacing:.05em;color:var(--muted);text-transform:uppercase}
+  .field label .req{color:var(--gold)}
+  .field input,.field textarea,.field select{
+    background:var(--bg-2);
+    border:1px solid var(--line);border-radius:12px;
+    padding:14px 15px;color:var(--text);font-size:15px;
+    transition:border-color .2s,background .2s,box-shadow .2s;
+    width:100%;
+  }
+  .field textarea{resize:vertical;min-height:120px;line-height:1.5}
+  .field select{appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239c9a93' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 15px center;padding-right:42px;cursor:pointer;}
+  .field input:focus,.field textarea:focus,.field select:focus{
+    outline:none;border-color:var(--gold);background:var(--bg-3);
+    box-shadow:0 0 0 3px rgba(242,182,71,.14);
+  }
+  .field input::placeholder,.field textarea::placeholder{color:var(--muted-2)}
+  .field.invalid input,.field.invalid textarea,.field.invalid select{border-color:#e0584f;box-shadow:0 0 0 3px rgba(224,88,79,.14)}
+  .field .err{font-size:12px;color:#e88379;display:none}
+  .field.invalid .err{display:block}
+  .row-2{display:grid;grid-template-columns:1fr;gap:18px}
+  form.contact-form .btn{justify-content:center;margin-top:4px}
+  .form-ok{
+    display:none;align-items:center;gap:12px;
+    background:rgba(242,182,71,.1);border:1px solid rgba(242,182,71,.35);
+    border-radius:14px;padding:16px 18px;color:var(--gold);font-weight:600;font-size:14.5px;
+  }
+  .form-ok.show{display:flex}
+  .form-ok svg{flex:none;width:22px;height:22px}
+
+  /* ===================== FOOTER ===================== */
+  footer{
+    position:relative;border-top:1px solid var(--line);
+    padding:54px 0 30px;margin-top:30px;
+    background:var(--bg-2);
+  }
+  .foot-top{
+    display:flex;flex-direction:column;gap:34px;
+    padding-bottom:34px;border-bottom:1px solid var(--line);
+  }
+  .foot-brand{max-width:340px}
+  .foot-brand p{color:var(--muted);font-size:14px;margin-top:16px;line-height:1.6}
+  .foot-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .foot-col h5{font-family:"Archivo";font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:14px}
+  .foot-col a{display:block;color:#cdcac3;font-size:14.5px;padding:6px 0;transition:color .2s}
+  .foot-col a:hover{color:var(--gold)}
+  .foot-bottom{
+    display:flex;flex-direction:column;gap:14px;
+    padding-top:24px;color:var(--muted-2);font-size:13px;
+  }
+  .foot-bottom .socials{display:flex;gap:10px}
+  .foot-bottom .socials a{
+    width:38px;height:38px;border-radius:10px;border:1px solid var(--line);
+    display:grid;place-items:center;color:var(--muted);transition:color .2s,border-color .2s,background .2s;
+  }
+  .foot-bottom .socials a:hover{color:var(--gold);border-color:var(--line-2);background:rgba(255,255,255,.03)}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+  }
+
+  /* ===================== RESPONSIVE ===================== */
+  @media(min-width:600px){
+    .wrap{padding:0 30px}
+    .stats{grid-template-columns:repeat(4,1fr)}
+    .wcat-grid{grid-template-columns:repeat(2,1fr)}
+    .fleet{grid-template-columns:repeat(2,1fr)}
+    .row-2{grid-template-columns:1fr 1fr}
+    .hero-stage{min-height:440px}
+    .foot-top{flex-direction:row;justify-content:space-between}
+    .foot-cols{grid-template-columns:repeat(2,auto);gap:60px}
+  }
+  @media(min-width:900px){
+    .nav-tabs{display:flex}
+    .nav-cta{display:inline-flex}
+    .burger{display:none}
+    .wcat-grid{grid-template-columns:repeat(4,1fr)}
+    .fleet{grid-template-columns:repeat(3,1fr)}
+    .contact-grid{grid-template-columns:0.85fr 1.15fr}
+    .hero{padding:150px 0 70px}
+    section.block{padding:108px 0}
+    .hero-stage{min-height:520px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo" aria-label="Tama Motors accueil">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 14l1.6-4.2A3 3 0 0 1 7.4 8h9.2a3 3 0 0 1 2.8 1.8L21 14M5 14h14v3.2a.8.8 0 0 1-.8.8h-1.6a.8.8 0 0 1-.8-.8V16H8v1.2a.8.8 0 0 1-.8.8H5.6a.8.8 0 0 1-.8-.8V14z" fill="#1a1305"/><circle cx="7.5" cy="14.5" r="1.1" fill="#1a1305"/><circle cx="16.5" cy="14.5" r="1.1" fill="#1a1305"/></svg>
+      </span>
+      <span>TAMA<br><b>MOTORS</b></span>
+    </a>
+
+    <nav class="nav-tabs" id="navTabs">
+      <a href="#car-wash" data-tab="car-wash">Car Wash</a>
+      <a href="#location" data-tab="location">Location</a>
+      <a href="#contact" data-tab="contact">Contact</a>
+    </nav>
+
+    <a href="#contact" class="nav-cta">Réserver</a>
+
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#car-wash"><span>Car Wash</span><span class="num">01</span></a>
+  <a href="#location"><span>Location</span><span class="num">02</span></a>
+  <a href="#contact"><span>Contact</span><span class="num">03</span></a>
+  <a href="#contact" class="mm-cta">Réserver maintenant</a>
+</div>
+
+<main id="top">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="topo"></div>
+  <div class="wrap">
+    <div class="hero-head">
+      <span class="eyebrow reveal">Tama Motors · Polynésie française</span>
+      <h1 class="display reveal">
+        Votre voiture<br>
+        <span class="line2">mérite le <span class="gold-text">mana</span></span>
+      </h1>
+      <p class="hero-sub reveal">
+        Deux services, une seule exigence. <b>Car Wash de détail</b> pour une finition impeccable,
+        et <b>location de véhicules</b> premium pour sillonner les îles en toute liberté.
+      </p>
+      <div class="hero-actions reveal">
+        <a href="#car-wash" class="btn btn-gold">
+          Découvrir nos services
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1305" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#location" class="btn btn-ghost">Voir la flotte</a>
+      </div>
+    </div>
+
+    <!-- hero showcase -->
+    <div class="hero-stage reveal">
+      <div class="topo"></div>
+      <div class="glow-floor"></div>
+      <div class="hero-chips">
+        <span class="chip"><span class="dot"></span> Finition showroom</span>
+        <span class="chip"><span class="dot"></span> Produits éco-responsables</span>
+        <span class="chip"><span class="dot"></span> Flotte entretenue à la main</span>
+      </div>
+      <div class="ph-car">
+        <svg class="car-silhouette" viewBox="0 0 640 220" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="carg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#3a3a40"/><stop offset="1" stop-color="#0f0f12"/>
+            </linearGradient>
+            <linearGradient id="glassg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f2b647" stop-opacity=".35"/><stop offset="1" stop-color="#e8941e" stop-opacity=".08"/>
+            </linearGradient>
+          </defs>
+          <path d="M40 168 Q44 132 96 124 L168 116 Q210 80 286 74 L398 70 Q470 72 520 110 L590 124 Q612 130 612 156 L612 168 Z" fill="url(#carg)" stroke="#4a4a52" stroke-width="1.5"/>
+          <path d="M196 114 Q230 86 290 82 L386 80 Q438 82 478 110 Z" fill="url(#glassg)"/>
+          <path d="M300 82 L300 112 M364 81 L370 112" stroke="#0f0f12" stroke-width="3"/>
+          <circle cx="170" cy="172" r="36" fill="#0c0c0e" stroke="#4a4a52" stroke-width="2"/>
+          <circle cx="170" cy="172" r="17" fill="#1a1a1e" stroke="#f2b647" stroke-width="1.5" stroke-opacity=".5"/>
+          <circle cx="478" cy="172" r="36" fill="#0c0c0e" stroke="#4a4a52" stroke-width="2"/>
+          <circle cx="478" cy="172" r="17" fill="#1a1a1e" stroke="#f2b647" stroke-width="1.5" stroke-opacity=".5"/>
+          <path d="M588 130 q18 4 18 20" stroke="#f2b647" stroke-width="3" stroke-linecap="round" fill="none" opacity=".7"/>
+        </svg>
+      </div>
+      <span class="stage-label">[ Emplacement visuel — photo véhicule / car wash 16:9 ]</span>
+    </div>
+
+    <!-- stats -->
+    <div class="stats reveal">
+      <div class="stat"><div class="num"><span class="gold-text">2</span></div><div class="lbl">Services premium</div></div>
+      <div class="stat"><div class="num">100<span class="gold-text">%</span></div><div class="lbl">Lavage à la main</div></div>
+      <div class="stat"><div class="num">24<span class="gold-text">h</span></div><div class="lbl">Réservation rapide</div></div>
+      <div class="stat"><div class="num"><span class="gold-text">5</span>★</div><div class="lbl">Avis clients</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CAR WASH ===================== -->
+<section class="block section-tint-wash" id="car-wash">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Service 01 — Car Wash</span>
+      <h2 class="display">L'éclat,<br>au détail près</h2>
+      <p>Un tarif clair par catégorie de véhicule. Deux prestations au choix :
+         <b style="color:var(--text);font-weight:700">Intérieur</b> ou <b style="color:var(--text);font-weight:700">Extérieur</b> seul,
+         ou le <b style="color:var(--gold);font-weight:700">Complet</b> (les deux). Finition contrôlée à la main.</p>
+    </div>
+
+    <div class="wcat-grid">
+      <button type="button" class="wcard reveal" data-wash="Lavage — Mini Citadines">
+        <div class="wcard-head">
+          <span class="wcard-name">Mini Citadines</span>
+          <span class="wcard-models">KWID · Twingo</span>
+        </div>
+        <div class="wcard-prices">
+          <span class="wprice"><span class="wprice-lbl">Int. ou Ext.</span><span class="wprice-val">2 500 <small>XPF</small></span></span>
+          <span class="wprice is-complet"><span class="wprice-lbl">Complet</span><span class="wprice-val">5 000 <small>XPF</small></span></span>
+        </div>
+      </button>
+
+      <button type="button" class="wcard reveal" data-wash="Lavage — Citadines">
+        <div class="wcard-head">
+          <span class="wcard-name">Citadines</span>
+          <span class="wcard-models">Polo · Swift</span>
+        </div>
+        <div class="wcard-prices">
+          <span class="wprice"><span class="wprice-lbl">Int. ou Ext.</span><span class="wprice-val">3 000 <small>XPF</small></span></span>
+          <span class="wprice is-complet"><span class="wprice-lbl">Complet</span><span class="wprice-val">6 000 <small>XPF</small></span></span>
+        </div>
+      </button>
+
+      <button type="button" class="wcard reveal" data-wash="Lavage — Compactes">
+        <div class="wcard-head">
+          <span class="wcard-name">Compactes</span>
+          <span class="wcard-models">Kia Niro · Kona</span>
+        </div>
+        <div class="wcard-prices">
+          <span class="wprice"><span class="wprice-lbl">Int. ou Ext.</span><span class="wprice-val">3 500 <small>XPF</small></span></span>
+          <span class="wprice is-complet"><span class="wprice-lbl">Complet</span><span class="wprice-val">7 000 <small>XPF</small></span></span>
+        </div>
+      </button>
+
+      <button type="button" class="wcard reveal" data-wash="Lavage — SUV">
+        <div class="wcard-head">
+          <span class="wcard-name">SUV</span>
+          <span class="wcard-models">Sportage · RAV4</span>
+        </div>
+        <div class="wcard-prices">
+          <span class="wprice"><span class="wprice-lbl">Int. ou Ext.</span><span class="wprice-val">4 000 <small>XPF</small></span></span>
+          <span class="wprice is-complet"><span class="wprice-lbl">Complet</span><span class="wprice-val">8 000 <small>XPF</small></span></span>
+        </div>
+      </button>
+
+      <button type="button" class="wcard reveal" data-wash="Lavage — Familiales 7 places">
+        <div class="wcard-head">
+          <span class="wcard-name">Familiales</span>
+          <span class="wcard-models">7 places</span>
+        </div>
+        <div class="wcard-prices">
+          <span class="wprice"><span class="wprice-lbl">Int. ou Ext.</span><span class="wprice-val">4 500 <small>XPF</small></span></span>
+          <span class="wprice is-complet"><span class="wprice-lbl">Complet</span><span class="wprice-val">9 000 <small>XPF</small></span></span>
+        </div>
+      </button>
+
+      <button type="button" class="wcard reveal" data-wash="Lavage — Pick-up">
+        <div class="wcard-head">
+          <span class="wcard-name">Pick-up</span>
+          <span class="wcard-models">Navara · Hilux</span>
+        </div>
+        <div class="wcard-prices">
+          <span class="wprice"><span class="wprice-lbl">Int. ou Ext.</span><span class="wprice-val">5 000 <small>XPF</small></span></span>
+          <span class="wprice is-complet"><span class="wprice-lbl">Complet</span><span class="wprice-val">10 000 <small>XPF</small></span></span>
+        </div>
+      </button>
+
+      <button type="button" class="wcard reveal" data-wash="Lavage — Gros SUV">
+        <div class="wcard-head">
+          <span class="wcard-name">Gros SUV</span>
+          <span class="wcard-models">Tahoe · Jeep G.C.</span>
+        </div>
+        <div class="wcard-prices">
+          <span class="wprice"><span class="wprice-lbl">Int. ou Ext.</span><span class="wprice-val">6 000 <small>XPF</small></span></span>
+          <span class="wprice is-complet"><span class="wprice-lbl">Complet</span><span class="wprice-val">12 000 <small>XPF</small></span></span>
+        </div>
+      </button>
+
+      <button type="button" class="wcard reveal" data-wash="Lavage — Gros 4×4">
+        <div class="wcard-head">
+          <span class="wcard-name">Gros 4×4</span>
+          <span class="wcard-models">Silverado</span>
+        </div>
+        <div class="wcard-prices">
+          <span class="wprice"><span class="wprice-lbl">Int. ou Ext.</span><span class="wprice-val">7 500 <small>XPF</small></span></span>
+          <span class="wprice is-complet"><span class="wprice-lbl">Complet</span><span class="wprice-val">15 000 <small>XPF</small></span></span>
+        </div>
+      </button>
+    </div>
+
+    <div class="wash-note reveal">
+      <span class="wn-lead">À noter</span>
+      <span class="wn-item">Voitures très sales : <b>sur devis</b></span>
+      <span class="wn-sep"></span>
+      <span class="wn-item">Poils d'animaux ou sable : <b>+2 000 XPF</b></span>
+      <span class="wn-sep"></span>
+      <span class="wn-item">Utilitaires : <b>sur devis</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LOCATION ===================== -->
+<section class="block" id="location">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Service 02 — Location</span>
+      <h2 class="display">Une flotte<br>choisie avec soin</h2>
+      <p>Pas de catalogue interminable — une sélection courte et fiable, du citadin au 4×4.
+         Chaque véhicule sort lavé par notre Car Wash. <em>Tarifs / jour indicatifs — kilométrage &amp; assurance à préciser.</em></p>
+    </div>
+
+    <div class="fleet" id="fleet"><!-- cards injected by JS --></div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Réservation &amp; contact</span>
+      <h2 class="display">Parlons-en</h2>
+      <p>Un lavage, une location, un devis sur-mesure ? Écrivez-nous ou appelez directement l'atelier.</p>
+    </div>
+
+    <div class="contact-grid">
+      <aside class="contact-aside reveal">
+        <div class="contact-card">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <div>
+            <h4>Appeler l'atelier</h4>
+            <div class="big">+689 40 12 34 56</div>
+            <div class="small">Lun–Sam · 7h30 – 17h30</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 7l-10 6L2 7"/></svg></span>
+          <div>
+            <h4>Email</h4>
+            <div class="big">contact@tamamotors.pf</div>
+            <div class="small">Réponse sous 24h</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <div>
+            <h4>Atelier</h4>
+            <div class="big">Punaauia, Tahiti</div>
+            <div class="small">PK 12, côté montagne · Polynésie française</div>
+          </div>
+        </div>
+      </aside>
+
+      <form class="contact-form reveal" id="contactForm" novalidate>
+        <div class="row-2">
+          <div class="field">
+            <label for="f-name">Nom <span class="req">*</span></label>
+            <input id="f-name" name="name" type="text" placeholder="Votre nom" required />
+            <span class="err">Merci d'indiquer votre nom.</span>
+          </div>
+          <div class="field">
+            <label for="f-email">Email <span class="req">*</span></label>
+            <input id="f-email" name="email" type="email" placeholder="vous@exemple.pf" required />
+            <span class="err">Email invalide.</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-service">Service concerné <span class="req">*</span></label>
+          <select id="f-service" name="service" required>
+            <option value="" disabled selected>Choisir un service…</option>
+            <optgroup label="Car Wash — lavage">
+              <option>Lavage — Mini Citadines</option>
+              <option>Lavage — Citadines</option>
+              <option>Lavage — Compactes</option>
+              <option>Lavage — SUV</option>
+              <option>Lavage — Familiales 7 places</option>
+              <option>Lavage — Pick-up</option>
+              <option>Lavage — Gros SUV</option>
+              <option>Lavage — Gros 4×4</option>
+            </optgroup>
+            <optgroup label="Location de véhicule">
+              <option>Location — Suzuki Swift</option>
+              <option>Location — Kia Sportage</option>
+              <option>Location — Toyota Hilux</option>
+            </optgroup>
+            <option>Autre / devis sur-mesure</option>
+          </select>
+          <span class="err">Merci de choisir un service.</span>
+        </div>
+        <div class="field">
+          <label for="f-msg">Message <span class="req">*</span></label>
+          <textarea id="f-msg" name="message" placeholder="Dates souhaitées, véhicule, modèle à laver…" required></textarea>
+          <span class="err">Dites-nous en quelques mots votre besoin.</span>
+        </div>
+        <button type="submit" class="btn btn-gold">
+          Envoyer la demande
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1305" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+        <div class="form-ok" id="formOk">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+          <span>Māuruuru ! Demande envoyée — nous revenons vers vous très vite.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="topo"></div>
+  <div class="wrap" style="position:relative;z-index:2">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#top" class="logo">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 14l1.6-4.2A3 3 0 0 1 7.4 8h9.2a3 3 0 0 1 2.8 1.8L21 14M5 14h14v3.2a.8.8 0 0 1-.8.8h-1.6a.8.8 0 0 1-.8-.8V16H8v1.2a.8.8 0 0 1-.8.8H5.6a.8.8 0 0 1-.8-.8V14z" fill="#1a1305"/><circle cx="7.5" cy="14.5" r="1.1" fill="#1a1305"/><circle cx="16.5" cy="14.5" r="1.1" fill="#1a1305"/></svg>
+          </span>
+          <span>TAMA<br><b>MOTORS</b></span>
+        </a>
+        <p>Car Wash de détail &amp; location de véhicules en Polynésie française. Le soin du local, l'exigence du premium.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h5>Navigation</h5>
+          <a href="#car-wash">Car Wash</a>
+          <a href="#location">Location</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="foot-col">
+          <h5>Infos</h5>
+          <a href="#contact">Réserver</a>
+          <a href="#car-wash">Tarifs</a>
+          <a href="#location">Notre flotte</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div class="socials">
+        <a href="#top" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#top" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#top" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 21l1.5-5.5a8.38 8.38 0 0 1-1-4A8.5 8.5 0 0 1 12 3a8.38 8.38 0 0 1 9 8.5z"/></svg></a>
+      </div>
+      <div>© <span id="year">2026</span> Tama Motors — Tous droits réservés · Punaauia, Tahiti · Tarifs indicatifs, susceptibles de modification.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- vehicle data (small curated fleet) ---------- */
+  var VEHICLES = [
+    {name:"Suzuki Swift",  catLabel:"Citadine",  sub:"Agile, parfaite en ville",    price:"6 500",  euro:"54 €",  seats:5, bags:2, trans:"Manuelle", body:"hatch",  paint:"#e6e3dc"},
+    {name:"Kia Sportage",  catLabel:"SUV",       sub:"Confort & route côtière",     price:"11 000", euro:"92 €",  seats:5, bags:4, trans:"Auto",     body:"suv",    paint:"#3a3a40"},
+    {name:"Toyota Hilux",  catLabel:"Pick-up",   sub:"Robuste, pour toutes pistes", price:"13 000", euro:"109 €", seats:5, bags:3, trans:"Auto",     body:"pickup", paint:"#2b2f36"}
+  ];
+
+  function carSVG(body, paint){
+    var glass = "rgba(242,182,71,.30)";
+    var outline = "#4a4a52";
+    if(body==="suv"){
+      return '<svg class="car" viewBox="0 0 320 160" fill="none">'+
+        '<path d="M24 104 Q26 78 64 72 L104 66 Q132 40 196 38 L236 40 Q280 44 300 78 L302 104 Z" fill="'+paint+'" stroke="'+outline+'" stroke-width="1.4"/>'+
+        '<path d="M118 64 Q140 46 192 45 L230 47 Q262 50 282 76 Z" fill="'+glass+'"/>'+
+        '<path d="M170 45 L168 76 M210 47 L214 76" stroke="#15151a" stroke-width="2.4"/>'+
+        '<circle cx="92" cy="110" r="26" fill="#0c0c0e" stroke="'+outline+'" stroke-width="1.6"/><circle cx="92" cy="110" r="12" fill="#1a1a1e" stroke="#f2b647" stroke-width="1.2" stroke-opacity=".5"/>'+
+        '<circle cx="244" cy="110" r="26" fill="#0c0c0e" stroke="'+outline+'" stroke-width="1.6"/><circle cx="244" cy="110" r="12" fill="#1a1a1e" stroke="#f2b647" stroke-width="1.2" stroke-opacity=".5"/>'+
+      '</svg>';
+    }
+    if(body==="pickup"){
+      return '<svg class="car" viewBox="0 0 320 160" fill="none">'+
+        '<path d="M22 110 L26 90 Q28 74 52 72 L120 70 Q150 48 196 48 L210 50 Q230 54 238 76 L238 92 L300 92 L302 110 Z" fill="'+paint+'" stroke="'+outline+'" stroke-width="1.4"/>'+
+        '<path d="M126 68 Q150 52 192 52 L206 54 Q224 58 232 76 L130 76 Z" fill="'+glass+'"/>'+
+        '<path d="M180 53 L178 76" stroke="#15151a" stroke-width="2.4"/>'+
+        '<path d="M244 80 L296 80 L298 104 L244 104 Z" fill="#0f0f12" stroke="'+outline+'" stroke-width="1.2"/>'+
+        '<circle cx="90" cy="114" r="26" fill="#0c0c0e" stroke="'+outline+'" stroke-width="1.6"/><circle cx="90" cy="114" r="12" fill="#1a1a1e" stroke="#f2b647" stroke-width="1.2" stroke-opacity=".5"/>'+
+        '<circle cx="250" cy="114" r="26" fill="#0c0c0e" stroke="'+outline+'" stroke-width="1.6"/><circle cx="250" cy="114" r="12" fill="#1a1a1e" stroke="#f2b647" stroke-width="1.2" stroke-opacity=".5"/>'+
+      '</svg>';
+    }
+    if(body==="van"){
+      return '<svg class="car" viewBox="0 0 320 160" fill="none">'+
+        '<path d="M22 108 L26 64 Q30 44 60 42 L246 42 Q286 44 296 74 L300 108 Z" fill="'+paint+'" stroke="'+outline+'" stroke-width="1.4"/>'+
+        '<path d="M60 52 L150 52 L150 78 L40 78 L42 60 Q44 52 60 52Z" fill="'+glass+'"/>'+
+        '<rect x="162" y="52" width="50" height="26" rx="3" fill="'+glass+'"/>'+
+        '<circle cx="86" cy="114" r="25" fill="#0c0c0e" stroke="'+outline+'" stroke-width="1.6"/><circle cx="86" cy="114" r="11" fill="#1a1a1e" stroke="#f2b647" stroke-width="1.2" stroke-opacity=".5"/>'+
+        '<circle cx="240" cy="114" r="25" fill="#0c0c0e" stroke="'+outline+'" stroke-width="1.6"/><circle cx="240" cy="114" r="11" fill="#1a1a1e" stroke="#f2b647" stroke-width="1.2" stroke-opacity=".5"/>'+
+      '</svg>';
+    }
+    /* hatch */
+    return '<svg class="car" viewBox="0 0 320 160" fill="none">'+
+      '<path d="M22 106 Q26 82 66 76 L108 72 Q138 50 198 48 L236 50 Q284 56 298 86 L300 106 Z" fill="'+paint+'" stroke="'+outline+'" stroke-width="1.4"/>'+
+      '<path d="M120 70 Q146 52 196 52 L232 54 Q266 58 282 84 Z" fill="'+glass+'"/>'+
+      '<path d="M176 52 L176 82 M214 54 L218 82" stroke="#15151a" stroke-width="2.4"/>'+
+      '<circle cx="94" cy="112" r="25" fill="#0c0c0e" stroke="'+outline+'" stroke-width="1.6"/><circle cx="94" cy="112" r="11" fill="#1a1a1e" stroke="#f2b647" stroke-width="1.2" stroke-opacity=".5"/>'+
+      '<circle cx="240" cy="112" r="25" fill="#0c0c0e" stroke="'+outline+'" stroke-width="1.6"/><circle cx="240" cy="112" r="11" fill="#1a1a1e" stroke="#f2b647" stroke-width="1.2" stroke-opacity=".5"/>'+
+    '</svg>';
+  }
+
+  var seatIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="#f2b647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.2"/><path d="M5 21v-1a7 7 0 0 1 14 0v1"/></svg>';
+  var bagIcon  = '<svg viewBox="0 0 24 24" fill="none" stroke="#f2b647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="12" rx="2"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>';
+  var transIcon= '<svg viewBox="0 0 24 24" fill="none" stroke="#f2b647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><path d="M6 8.4v7.2M18 8.4v3.6a2 2 0 0 1-2 2H6"/></svg>';
+
+  function renderFleet(){
+    var box = document.getElementById("fleet");
+    box.innerHTML = "";
+    VEHICLES.forEach(function(v){
+      var card = document.createElement("article");
+      card.className = "vcard reveal in";
+      card.innerHTML =
+        '<div class="vcard-media">'+
+          '<div class="topo"></div><div class="glow-floor"></div>'+
+          '<span class="vcat">'+v.catLabel+'</span>'+
+          carSVG(v.body, v.paint)+
+          '<span class="vph-tag">[ photo véhicule ]</span>'+
+        '</div>'+
+        '<div class="vcard-body">'+
+          '<div class="vcard-top">'+
+            '<div><h3>'+v.name+'</h3><div class="sub">'+v.sub+'</div></div>'+
+            '<div class="vprice"><div class="amt">'+v.price+' <small>XPF</small></div><div class="per">/ jour · ~'+v.euro+'</div></div>'+
+          '</div>'+
+          '<div class="vspecs">'+
+            '<span class="spec">'+seatIcon+v.seats+' places</span>'+
+            '<span class="spec">'+bagIcon+v.bags+' bagages</span>'+
+            '<span class="spec">'+transIcon+v.trans+'</span>'+
+          '</div>'+
+          '<button class="btn btn-gold" data-rent="Location — '+v.name+'">Réserver</button>'+
+        '</div>';
+      box.appendChild(card);
+    });
+  }
+  renderFleet();
+
+  /* ---------- prefill contact form from CTA buttons (event delegation) ---------- */
+  function prefill(service){
+    var sel = document.getElementById("f-service");
+    var match = Array.prototype.find.call(sel.options, function(o){return o.value===service || o.textContent===service;});
+    if(match){ sel.value = match.value || match.textContent; sel.parentElement.classList.remove("invalid"); }
+    document.getElementById("contact").scrollIntoView({behavior:"smooth", block:"start"});
+    setTimeout(function(){ document.getElementById("f-name").focus({preventScroll:true}); }, 700);
+  }
+  /* ---------- prefill contact form from CTA buttons (native anchors handle nav) ---------- */
+  document.addEventListener("click", function(e){
+    var rent = e.target.closest("[data-rent]");
+    var wash = e.target.closest("[data-wash]");
+    if(rent){ prefill(rent.getAttribute("data-rent")); }
+    else if(wash){ prefill(wash.getAttribute("data-wash")); }
+  });
+
+  /* ---------- nav scroll state ---------- */
+  var nav = document.getElementById("nav");
+  function onScroll(){ nav.classList.toggle("scrolled", window.scrollY > 24); }
+  onScroll(); window.addEventListener("scroll", onScroll, {passive:true});
+
+  /* ---------- mobile menu ---------- */
+  var burger = document.getElementById("burger");
+  var menu = document.getElementById("mobileMenu");
+  function closeMenu(){ menu.classList.remove("open"); burger.classList.remove("open"); burger.setAttribute("aria-expanded","false"); document.body.style.overflow=""; }
+  burger.addEventListener("click", function(){
+    var open = menu.classList.toggle("open");
+    burger.classList.toggle("open", open);
+    burger.setAttribute("aria-expanded", String(open));
+    document.body.style.overflow = open ? "hidden" : "";
+  });
+  menu.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", closeMenu); });
+
+  /* ---------- active tab via IntersectionObserver ---------- */
+  var tabs = document.querySelectorAll("#navTabs a");
+  var sections = ["car-wash","location","contact"].map(function(id){return document.getElementById(id);});
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        var id = en.target.id;
+        tabs.forEach(function(t){ t.classList.toggle("active", t.getAttribute("data-tab")===id); });
+      }
+    });
+  }, {rootMargin:"-45% 0px -50% 0px", threshold:0});
+  sections.forEach(function(s){ if(s) io.observe(s); });
+
+  /* ---------- reveal on scroll (manual sweep — fires synchronously, never leaves content hidden) ---------- */
+  var reveals = [].slice.call(document.querySelectorAll(".reveal"));
+  function inView(el){
+    var r = el.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    return r.top < vh * 0.92 && r.bottom > 0;
+  }
+  function sweep(){
+    for(var i = reveals.length - 1; i >= 0; i--){
+      if(inView(reveals[i])){ reveals[i].classList.add("in"); reveals.splice(i, 1); }
+    }
+  }
+  sweep();                                   // reveal above-the-fold immediately
+  requestAnimationFrame(sweep);
+  window.addEventListener("scroll", sweep, {passive:true});
+  window.addEventListener("resize", sweep);
+  window.addEventListener("load", function(){ sweep(); setTimeout(sweep, 150); });
+  /* safety net: content must never stay invisible */
+  setTimeout(function(){ reveals.forEach(function(el){ el.classList.add("in"); }); reveals.length = 0; }, 2500);
+
+  /* ---------- form validation ---------- */
+  var form = document.getElementById("contactForm");
+  function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var ok = true;
+    [["f-name",function(v){return v.trim().length>1;}],
+     ["f-email",validEmail],
+     ["f-service",function(v){return !!v;}],
+     ["f-msg",function(v){return v.trim().length>3;}]
+    ].forEach(function(pair){
+      var el = document.getElementById(pair[0]);
+      var good = pair[1](el.value);
+      el.parentElement.classList.toggle("invalid", !good);
+      if(!good) ok = false;
+    });
+    if(!ok){ form.querySelector(".invalid input,.invalid select,.invalid textarea").focus(); return; }
+    document.getElementById("formOk").classList.add("show");
+    form.querySelector('button[type="submit"]').style.display = "none";
+    setTimeout(function(){ document.getElementById("formOk").scrollIntoView({block:"nearest"}); }, 60);
+  });
+  form.querySelectorAll("input,select,textarea").forEach(function(el){
+    el.addEventListener("input", function(){ el.parentElement.classList.remove("invalid"); });
+    el.addEventListener("change", function(){ el.parentElement.classList.remove("invalid"); });
+  });
+
+  /* year */
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
