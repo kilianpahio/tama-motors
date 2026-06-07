@@ -998,6 +998,26 @@
   </div>
 </section>
 
+<style>
+  .svc-picker{display:flex;flex-direction:column;gap:5px;margin-top:6px}
+  .svc-glabel{font-family:"Archivo";font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);padding:6px 2px 2px}
+  .svc-row{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg-2);border:1px solid var(--line);border-radius:11px;padding:9px 13px;transition:border-color .2s,background .2s;cursor:pointer;user-select:none}
+  .svc-row.on{border-color:rgba(242,182,71,.45);background:rgba(242,182,71,.06)}
+  .svc-main{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+  .svc-chk{width:17px;height:17px;border-radius:5px;flex:none;border:1.5px solid var(--line-2);display:grid;place-items:center;transition:all .2s}
+  .svc-row.on .svc-chk{background:var(--gold);border-color:var(--gold)}
+  .svc-chk::after{content:"✓";font-size:10px;color:#1a1305;display:none;font-weight:900;line-height:1}
+  .svc-row.on .svc-chk::after{display:block}
+  .svc-nm{font-size:13.5px;font-weight:700;color:var(--text)}
+  .svc-mdl{font-size:11px;color:var(--muted);margin-left:3px}
+  .svc-types{display:flex;gap:3px;flex:none}
+  .svc-t{font-size:11px;font-weight:700;padding:5px 9px;border-radius:7px;border:1px solid var(--line);color:var(--muted);transition:all .2s;opacity:.28;cursor:pointer;white-space:nowrap;background:none}
+  .svc-row.on .svc-t{opacity:1}
+  .svc-t.on{background:var(--grad-gold);color:#1a1305;border-color:transparent;opacity:1!important}
+  #svc-field.is-error .svc-picker{box-shadow:0 0 0 3px rgba(224,88,79,.14);border-radius:12px;outline:1px solid #e0584f}
+  @media(max-width:480px){.svc-mdl{display:none}.svc-t{padding:4px 7px;font-size:10px}}
+</style>
+
 <!-- ===================== CONTACT ===================== -->
 <section class="block" id="contact">
   <div class="wrap">
@@ -1057,28 +1077,25 @@
             <span class="err">Email invalide.</span>
           </div>
         </div>
-        <div class="field">
-          <label for="f-service">Service concerné <span class="req">*</span></label>
-          <select id="f-service" name="service" required>
-            <option value="" disabled selected>Choisir un service…</option>
-            <optgroup label="Car Wash — lavage">
-              <option>Lavage — Mini Citadines</option>
-              <option>Lavage — Citadines</option>
-              <option>Lavage — Compactes</option>
-              <option>Lavage — SUV</option>
-              <option>Lavage — Familiales 7 places</option>
-              <option>Lavage — Pick-up</option>
-              <option>Lavage — Gros SUV</option>
-              <option>Lavage — Gros 4×4</option>
-            </optgroup>
-            <optgroup label="Location de véhicule">
-              <option>Location — Suzuki Swift</option>
-              <option>Location — Kia Sportage</option>
-              <option>Location — Toyota Hilux</option>
-            </optgroup>
-            <option>Autre / devis sur-mesure</option>
-          </select>
-          <span class="err">Merci de choisir un service.</span>
+        <div class="field" id="svc-field">
+          <label>Service(s) souhaité(s) <span class="req">*</span></label>
+          <input type="hidden" id="serviceHidden" name="service"/>
+          <div class="svc-picker">
+            <div class="svc-glabel">— Car Wash</div>
+            <div class="svc-row" data-svc="Mini Citadines"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Mini Citadines</span><span class="svc-mdl">KWID · Twingo</span></div><div class="svc-types"><button type="button" class="svc-t" data-t="Int.">Int.</button><button type="button" class="svc-t" data-t="Ext.">Ext.</button><button type="button" class="svc-t" data-t="Complet">Complet</button></div></div>
+            <div class="svc-row" data-svc="Citadines"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Citadines</span><span class="svc-mdl">Polo · Swift</span></div><div class="svc-types"><button type="button" class="svc-t" data-t="Int.">Int.</button><button type="button" class="svc-t" data-t="Ext.">Ext.</button><button type="button" class="svc-t" data-t="Complet">Complet</button></div></div>
+            <div class="svc-row" data-svc="Compactes"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Compactes</span><span class="svc-mdl">Kia Niro · Kona</span></div><div class="svc-types"><button type="button" class="svc-t" data-t="Int.">Int.</button><button type="button" class="svc-t" data-t="Ext.">Ext.</button><button type="button" class="svc-t" data-t="Complet">Complet</button></div></div>
+            <div class="svc-row" data-svc="SUV"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">SUV</span><span class="svc-mdl">Sportage · RAV4</span></div><div class="svc-types"><button type="button" class="svc-t" data-t="Int.">Int.</button><button type="button" class="svc-t" data-t="Ext.">Ext.</button><button type="button" class="svc-t" data-t="Complet">Complet</button></div></div>
+            <div class="svc-row" data-svc="Familiales 7 places"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Familiales</span><span class="svc-mdl">7 places</span></div><div class="svc-types"><button type="button" class="svc-t" data-t="Int.">Int.</button><button type="button" class="svc-t" data-t="Ext.">Ext.</button><button type="button" class="svc-t" data-t="Complet">Complet</button></div></div>
+            <div class="svc-row" data-svc="Pick-up"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Pick-up</span><span class="svc-mdl">Navara · Hilux</span></div><div class="svc-types"><button type="button" class="svc-t" data-t="Int.">Int.</button><button type="button" class="svc-t" data-t="Ext.">Ext.</button><button type="button" class="svc-t" data-t="Complet">Complet</button></div></div>
+            <div class="svc-row" data-svc="Gros SUV"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Gros SUV</span><span class="svc-mdl">Tahoe · Jeep G.C.</span></div><div class="svc-types"><button type="button" class="svc-t" data-t="Int.">Int.</button><button type="button" class="svc-t" data-t="Ext.">Ext.</button><button type="button" class="svc-t" data-t="Complet">Complet</button></div></div>
+            <div class="svc-row" data-svc="Gros 4×4"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Gros 4×4</span><span class="svc-mdl">Silverado</span></div><div class="svc-types"><button type="button" class="svc-t" data-t="Int.">Int.</button><button type="button" class="svc-t" data-t="Ext.">Ext.</button><button type="button" class="svc-t" data-t="Complet">Complet</button></div></div>
+            <div class="svc-glabel" style="margin-top:4px;">— Location</div>
+            <div class="svc-row" data-svc="Suzuki Swift"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Suzuki Swift</span><span class="svc-mdl">Citadine</span></div></div>
+            <div class="svc-row" data-svc="Kia Sportage"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Kia Sportage</span><span class="svc-mdl">SUV</span></div></div>
+            <div class="svc-row" data-svc="Toyota Hilux"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Toyota Hilux</span><span class="svc-mdl">Pick-up</span></div></div>
+          </div>
+          <span class="err" id="svc-err" style="display:none;">Choisissez au moins un service.</span>
         </div>
         <div class="field">
           <label for="f-msg">Message <span class="req">*</span></label>
@@ -1241,10 +1258,44 @@
   renderFleet();
 
   /* ---------- prefill contact form from CTA buttons (event delegation) ---------- */
+  /* ---------- service picker ---------- */
+  var svcHidden = document.getElementById("serviceHidden");
+  function updateSvc(){
+    var vals=[];
+    document.querySelectorAll(".svc-row.on").forEach(function(row){
+      var nm=row.getAttribute("data-svc");
+      var t=row.querySelector(".svc-t.on");
+      vals.push(nm+(t?" — "+t.getAttribute("data-t"):""));
+    });
+    svcHidden.value=vals.join(" | ");
+  }
+  document.querySelectorAll(".svc-row").forEach(function(row){
+    var main=row.querySelector(".svc-main");
+    var types=row.querySelectorAll(".svc-t");
+    if(main) main.addEventListener("click",function(){
+      row.classList.toggle("on");
+      if(!row.classList.contains("on")) types.forEach(function(t){t.classList.remove("on");});
+      updateSvc();
+      document.getElementById("svc-field").classList.remove("is-error");
+      document.getElementById("svc-err").style.display="none";
+    });
+    types.forEach(function(btn){
+      btn.addEventListener("click",function(e){
+        e.stopPropagation();
+        row.classList.add("on");
+        types.forEach(function(t){t.classList.remove("on");});
+        btn.classList.add("on");
+        updateSvc();
+        document.getElementById("svc-field").classList.remove("is-error");
+        document.getElementById("svc-err").style.display="none";
+      });
+    });
+  });
+
   function prefill(service){
-    var sel = document.getElementById("f-service");
-    var match = Array.prototype.find.call(sel.options, function(o){return o.value===service || o.textContent===service;});
-    if(match){ sel.value = match.value || match.textContent; sel.parentElement.classList.remove("invalid"); }
+    var name=service.replace(/^(Lavage|Location)\s*[—-]\s*/,"");
+    var row=document.querySelector('.svc-row[data-svc="'+name+'"]');
+    if(row){ row.classList.add("on"); updateSvc(); document.getElementById("svc-field").classList.remove("is-error"); }
     document.getElementById("contact").scrollIntoView({behavior:"smooth", block:"start"});
     setTimeout(function(){ document.getElementById("f-name").focus({preventScroll:true}); }, 700);
   }
@@ -1314,7 +1365,6 @@
     var ok = true;
     [["f-name",function(v){return v.trim().length>1;}],
      ["f-email",validEmail],
-     ["f-service",function(v){return !!v;}],
      ["f-msg",function(v){return v.trim().length>3;}]
     ].forEach(function(pair){
       var el = document.getElementById(pair[0]);
@@ -1322,12 +1372,17 @@
       el.parentElement.classList.toggle("invalid", !good);
       if(!good) ok = false;
     });
-    if(!ok){ form.querySelector(".invalid input,.invalid select,.invalid textarea").focus(); return; }
+    if(!svcHidden.value){
+      document.getElementById("svc-field").classList.add("is-error");
+      document.getElementById("svc-err").style.display="block";
+      ok=false;
+    }
+    if(!ok){ var fe=form.querySelector(".invalid input,.invalid textarea"); if(fe) fe.focus(); return; }
     document.getElementById("formOk").classList.add("show");
     form.querySelector('button[type="submit"]').style.display = "none";
     setTimeout(function(){ document.getElementById("formOk").scrollIntoView({block:"nearest"}); }, 60);
   });
-  form.querySelectorAll("input,select,textarea").forEach(function(el){
+  form.querySelectorAll("input,textarea").forEach(function(el){
     el.addEventListener("input", function(){ el.parentElement.classList.remove("invalid"); });
     el.addEventListener("change", function(){ el.parentElement.classList.remove("invalid"); });
   });
