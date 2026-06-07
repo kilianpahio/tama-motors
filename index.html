@@ -535,6 +535,20 @@
     section.block{padding:108px 0}
     .hero-stage{min-height:520px}
   }
+
+  /* ===================== CAR SVG ANIMATIONS ===================== */
+  @keyframes float-car{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-10px)}
+  }
+  @keyframes glow-pulse-ground{
+    0%,100%{opacity:1;transform:translateX(-50%) scaleX(1)}
+    50%{opacity:0.5;transform:translateX(-50%) scaleX(0.75)}
+  }
+  @media(prefers-reduced-motion:reduce){
+    @keyframes float-car{0%,100%{transform:none}}
+    @keyframes glow-pulse-ground{0%,100%{transform:translateX(-50%)}}
+  }
 </style>
 </head>
 <body>
@@ -607,26 +621,97 @@
         <span class="chip"><span class="dot"></span> Flotte entretenue à la main</span>
       </div>
       <div class="ph-car">
-        <svg class="car-silhouette" viewBox="0 0 640 220" fill="none" aria-hidden="true">
-          <defs>
-            <linearGradient id="carg" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#3a3a40"/><stop offset="1" stop-color="#0f0f12"/>
-            </linearGradient>
-            <linearGradient id="glassg" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#f2b647" stop-opacity=".35"/><stop offset="1" stop-color="#e8941e" stop-opacity=".08"/>
-            </linearGradient>
-          </defs>
-          <path d="M40 168 Q44 132 96 124 L168 116 Q210 80 286 74 L398 70 Q470 72 520 110 L590 124 Q612 130 612 156 L612 168 Z" fill="url(#carg)" stroke="#4a4a52" stroke-width="1.5"/>
-          <path d="M196 114 Q230 86 290 82 L386 80 Q438 82 478 110 Z" fill="url(#glassg)"/>
-          <path d="M300 82 L300 112 M364 81 L370 112" stroke="#0f0f12" stroke-width="3"/>
-          <circle cx="170" cy="172" r="36" fill="#0c0c0e" stroke="#4a4a52" stroke-width="2"/>
-          <circle cx="170" cy="172" r="17" fill="#1a1a1e" stroke="#f2b647" stroke-width="1.5" stroke-opacity=".5"/>
-          <circle cx="478" cy="172" r="36" fill="#0c0c0e" stroke="#4a4a52" stroke-width="2"/>
-          <circle cx="478" cy="172" r="17" fill="#1a1a1e" stroke="#f2b647" stroke-width="1.5" stroke-opacity=".5"/>
-          <path d="M588 130 q18 4 18 20" stroke="#f2b647" stroke-width="3" stroke-linecap="round" fill="none" opacity=".7"/>
-        </svg>
+        <div style="position:relative;width:min(88%,760px);">
+          <div style="position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:62%;height:18px;background:radial-gradient(ellipse,rgba(242,182,71,.5),transparent 70%);filter:blur(14px);animation:glow-pulse-ground 3.5s ease-in-out infinite;"></div>
+          <svg viewBox="0 0 900 260" fill="none" aria-hidden="true" style="width:100%;height:auto;filter:drop-shadow(0 28px 48px rgba(0,0,0,.9));animation:float-car 3.5s ease-in-out infinite;">
+            <defs>
+              <linearGradient id="cb" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2c2c34"/>
+                <stop offset="30%" stop-color="#1c1c22"/>
+                <stop offset="100%" stop-color="#0c0c0e"/>
+              </linearGradient>
+              <linearGradient id="cs" x1="0.1" y1="0" x2="0.9" y2="1">
+                <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
+                <stop offset="42%" stop-color="#fff" stop-opacity="0.11"/>
+                <stop offset="58%" stop-color="#fff" stop-opacity="0.04"/>
+                <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+              </linearGradient>
+              <linearGradient id="cgl" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#f2b647" stop-opacity="0.24"/>
+                <stop offset="100%" stop-color="#0c0c18" stop-opacity="0.88"/>
+              </linearGradient>
+              <radialGradient id="cw" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#222228"/>
+                <stop offset="100%" stop-color="#0c0c0e"/>
+              </radialGradient>
+              <radialGradient id="cr" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#f9cf6a"/>
+                <stop offset="100%" stop-color="#e8941e"/>
+              </radialGradient>
+            </defs>
+
+            <!-- CARROSSERIE -->
+            <path d="M108 220 Q104 220 102 206 L102 192 Q106 166 140 156 L255 80 Q280 56 318 50 L496 46 Q538 46 570 60 L656 118 Q688 140 720 144 L800 144 Q834 144 836 162 L836 186 Q836 222 802 222 L108 222 Z" fill="url(#cb)" stroke="#28282e" stroke-width="1"/>
+
+            <!-- REFLET HUMIDE (surface mouillée après lavage) -->
+            <path d="M140 158 L258 82 Q282 58 320 52 L496 48 Q538 48 568 62 L652 120 Q688 142 720 146 L804 146 L808 160 L720 150 Q684 146 648 124 L562 68 Q540 56 498 52 L320 58 Q284 62 262 86 L148 162 Z" fill="url(#cs)"/>
+
+            <!-- PARE-BRISE -->
+            <path d="M320 52 L258 86 Q238 98 228 120 L242 122 Q252 100 272 86 L332 60 L496 50 Q537 50 566 64 L572 62 Q542 48 498 48 L320 52 Z" fill="url(#cgl)"/>
+
+            <!-- MONTANTS (A/B/C) -->
+            <line x1="320" y1="52" x2="234" y2="122" stroke="#14141a" stroke-width="8" stroke-linecap="round"/>
+            <line x1="420" y1="47" x2="418" y2="128" stroke="#14141a" stroke-width="5" stroke-linecap="round"/>
+            <line x1="497" y1="47" x2="570" y2="62" stroke="#14141a" stroke-width="5" stroke-linecap="round"/>
+
+            <!-- LIGNE OR SUR LE TOIT -->
+            <path d="M258 82 Q282 58 320 52 L496 48 Q538 48 568 62" stroke="#f2b647" stroke-width="1.5" stroke-opacity="0.55" fill="none"/>
+
+            <!-- LIGNE DE CAISSE -->
+            <path d="M248 130 L640 126 Q675 128 700 144" stroke="#3a3a44" stroke-width="1.2" fill="none"/>
+
+            <!-- ROUE AVANT -->
+            <circle cx="708" cy="222" r="67" fill="#09090b"/>
+            <circle cx="708" cy="222" r="60" fill="url(#cw)"/>
+            <circle cx="708" cy="222" r="60" stroke="#1c1c22" stroke-width="3" fill="none"/>
+            <circle cx="708" cy="222" r="37" fill="#111116" stroke="url(#cr)" stroke-width="3"/>
+            <g>
+              <line x1="708" y1="188" x2="708" y2="256" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <line x1="674" y1="222" x2="742" y2="222" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <line x1="684" y1="198" x2="732" y2="246" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <line x1="732" y1="198" x2="684" y2="246" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <animateTransform attributeName="transform" type="rotate" from="0 708 222" to="360 708 222" dur="3s" repeatCount="indefinite"/>
+            </g>
+            <circle cx="708" cy="222" r="10" fill="url(#cr)"/>
+
+            <!-- ROUE ARRIÈRE -->
+            <circle cx="260" cy="222" r="67" fill="#09090b"/>
+            <circle cx="260" cy="222" r="60" fill="url(#cw)"/>
+            <circle cx="260" cy="222" r="60" stroke="#1c1c22" stroke-width="3" fill="none"/>
+            <circle cx="260" cy="222" r="37" fill="#111116" stroke="url(#cr)" stroke-width="3"/>
+            <g>
+              <line x1="260" y1="188" x2="260" y2="256" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <line x1="226" y1="222" x2="294" y2="222" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <line x1="236" y1="198" x2="284" y2="246" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <line x1="284" y1="198" x2="236" y2="246" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <animateTransform attributeName="transform" type="rotate" from="0 260 222" to="360 260 222" dur="3s" repeatCount="indefinite"/>
+            </g>
+            <circle cx="260" cy="222" r="10" fill="url(#cr)"/>
+
+            <!-- PHARE AVANT -->
+            <path d="M828 164 Q836 174 834 186 L822 184 Q826 174 822 164 Z" fill="#f2b647" opacity="0.85"/>
+            <line x1="836" y1="170" x2="872" y2="164" stroke="#f9cf6a" stroke-width="1.5" stroke-opacity="0.65"/>
+            <line x1="836" y1="176" x2="876" y2="173" stroke="#f9cf6a" stroke-width="1" stroke-opacity="0.4"/>
+
+            <!-- FEU ARRIÈRE -->
+            <path d="M102 194 L110 194 L114 210 L108 216 L102 210 Z" fill="#dc2626" opacity="0.78"/>
+
+            <!-- SORTIES D'ÉCHAPPEMENT -->
+            <ellipse cx="118" cy="218" rx="5.5" ry="3.5" fill="#1a1a1e" stroke="#2e2e36" stroke-width="1"/>
+            <ellipse cx="132" cy="218" rx="5.5" ry="3.5" fill="#1a1a1e" stroke="#2e2e36" stroke-width="1"/>
+          </svg>
+        </div>
       </div>
-      <span class="stage-label">[ Emplacement visuel — photo véhicule / car wash 16:9 ]</span>
     </div>
 
     <!-- stats -->
