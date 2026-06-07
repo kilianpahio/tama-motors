@@ -621,9 +621,8 @@
         <span class="chip"><span class="dot"></span> Flotte entretenue à la main</span>
       </div>
       <div class="ph-car">
-        <div style="position:relative;width:min(88%,760px);">
-          <div style="position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:62%;height:18px;background:radial-gradient(ellipse,rgba(242,182,71,.5),transparent 70%);filter:blur(14px);animation:glow-pulse-ground 3.5s ease-in-out infinite;"></div>
-          <svg viewBox="0 0 900 260" fill="none" aria-hidden="true" style="width:100%;height:auto;filter:drop-shadow(0 28px 48px rgba(0,0,0,.9));animation:float-car 3.5s ease-in-out infinite;">
+        <div style="width:min(88%,760px);">
+          <svg viewBox="0 0 900 295" fill="none" aria-hidden="true" style="width:100%;height:auto;filter:drop-shadow(0 20px 42px rgba(0,0,0,.88));animation:float-car 3.5s ease-in-out infinite;">
             <defs>
               <linearGradient id="cb" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stop-color="#2c2c34"/>
@@ -648,10 +647,17 @@
                 <stop offset="0%" stop-color="#f9cf6a"/>
                 <stop offset="100%" stop-color="#e8941e"/>
               </radialGradient>
+              <filter id="glowBlur"><feGaussianBlur stdDeviation="10"/></filter>
             </defs>
 
-            <!-- CARROSSERIE -->
-            <path d="M108 220 Q104 220 102 206 L102 192 Q106 166 140 156 L255 80 Q280 56 318 50 L496 46 Q538 46 570 60 L656 118 Q688 140 720 144 L800 144 Q834 144 836 162 L836 186 Q836 222 802 222 L108 222 Z" fill="url(#cb)" stroke="#28282e" stroke-width="1"/>
+            <!-- HALO AU SOL -->
+            <ellipse cx="484" cy="290" rx="300" ry="7" fill="rgba(242,182,71,0.38)" filter="url(#glowBlur)">
+              <animate attributeName="rx" values="300;240;300" dur="3.5s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.38;0.16;0.38" dur="3.5s" repeatCount="indefinite"/>
+            </ellipse>
+
+            <!-- CARROSSERIE avec arches de roues -->
+            <path d="M108 222 Q104 222 102 208 L102 194 Q106 168 140 158 L255 82 Q280 58 318 52 L496 48 Q538 48 570 62 L656 120 Q688 142 720 146 L800 146 Q834 146 836 164 L836 188 Q836 224 802 224 L770 224 A63 63 0 0 1 644 224 L322 224 A63 63 0 0 1 196 224 L108 224 Z" fill="url(#cb)" stroke="#28282e" stroke-width="1"/>
 
             <!-- REFLET HUMIDE (surface mouillée après lavage) -->
             <path d="M140 158 L258 82 Q282 58 320 52 L496 48 Q538 48 568 62 L652 120 Q688 142 720 146 L804 146 L808 160 L720 150 Q684 146 648 124 L562 68 Q540 56 498 52 L320 58 Q284 62 262 86 L148 162 Z" fill="url(#cs)"/>
@@ -670,33 +676,31 @@
             <!-- LIGNE DE CAISSE -->
             <path d="M248 130 L640 126 Q675 128 700 144" stroke="#3a3a44" stroke-width="1.2" fill="none"/>
 
-            <!-- ROUE AVANT -->
-            <circle cx="708" cy="222" r="67" fill="#09090b"/>
-            <circle cx="708" cy="222" r="60" fill="url(#cw)"/>
-            <circle cx="708" cy="222" r="60" stroke="#1c1c22" stroke-width="3" fill="none"/>
-            <circle cx="708" cy="222" r="37" fill="#111116" stroke="url(#cr)" stroke-width="3"/>
+            <!-- ROUE AVANT (cx=707, cy=224 = centre de l'arche) -->
+            <circle cx="707" cy="224" r="60" fill="url(#cw)"/>
+            <circle cx="707" cy="224" r="60" stroke="#1c1c22" stroke-width="2.5" fill="none"/>
+            <circle cx="707" cy="224" r="36" fill="#111116" stroke="url(#cr)" stroke-width="3"/>
             <g>
-              <line x1="708" y1="188" x2="708" y2="256" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
-              <line x1="674" y1="222" x2="742" y2="222" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
-              <line x1="684" y1="198" x2="732" y2="246" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
-              <line x1="732" y1="198" x2="684" y2="246" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
-              <animateTransform attributeName="transform" type="rotate" from="0 708 222" to="360 708 222" dur="3s" repeatCount="indefinite"/>
+              <line x1="707" y1="190" x2="707" y2="258" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <line x1="673" y1="224" x2="741" y2="224" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <line x1="683" y1="200" x2="731" y2="248" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <line x1="731" y1="200" x2="683" y2="248" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <animateTransform attributeName="transform" type="rotate" from="0 707 224" to="360 707 224" dur="3s" repeatCount="indefinite"/>
             </g>
-            <circle cx="708" cy="222" r="10" fill="url(#cr)"/>
+            <circle cx="707" cy="224" r="10" fill="url(#cr)"/>
 
-            <!-- ROUE ARRIÈRE -->
-            <circle cx="260" cy="222" r="67" fill="#09090b"/>
-            <circle cx="260" cy="222" r="60" fill="url(#cw)"/>
-            <circle cx="260" cy="222" r="60" stroke="#1c1c22" stroke-width="3" fill="none"/>
-            <circle cx="260" cy="222" r="37" fill="#111116" stroke="url(#cr)" stroke-width="3"/>
+            <!-- ROUE ARRIÈRE (cx=259, cy=224 = centre de l'arche) -->
+            <circle cx="259" cy="224" r="60" fill="url(#cw)"/>
+            <circle cx="259" cy="224" r="60" stroke="#1c1c22" stroke-width="2.5" fill="none"/>
+            <circle cx="259" cy="224" r="36" fill="#111116" stroke="url(#cr)" stroke-width="3"/>
             <g>
-              <line x1="260" y1="188" x2="260" y2="256" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
-              <line x1="226" y1="222" x2="294" y2="222" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
-              <line x1="236" y1="198" x2="284" y2="246" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
-              <line x1="284" y1="198" x2="236" y2="246" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
-              <animateTransform attributeName="transform" type="rotate" from="0 260 222" to="360 260 222" dur="3s" repeatCount="indefinite"/>
+              <line x1="259" y1="190" x2="259" y2="258" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <line x1="225" y1="224" x2="293" y2="224" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <line x1="235" y1="200" x2="283" y2="248" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <line x1="283" y1="200" x2="235" y2="248" stroke="#f2b647" stroke-width="2.5" stroke-opacity="0.88"/>
+              <animateTransform attributeName="transform" type="rotate" from="0 259 224" to="360 259 224" dur="3s" repeatCount="indefinite"/>
             </g>
-            <circle cx="260" cy="222" r="10" fill="url(#cr)"/>
+            <circle cx="259" cy="224" r="10" fill="url(#cr)"/>
 
             <!-- PHARE AVANT -->
             <path d="M828 164 Q836 174 834 186 L822 184 Q826 174 822 164 Z" fill="#f2b647" opacity="0.85"/>
