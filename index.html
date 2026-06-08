@@ -529,7 +529,7 @@
     .nav-cta{display:inline-flex}
     .burger{display:none}
     .wcat-grid{grid-template-columns:repeat(4,1fr)}
-    .fleet{grid-template-columns:repeat(2,1fr)}
+    .fleet{grid-template-columns:minmax(0,520px)}
     .contact-grid{grid-template-columns:0.85fr 1.15fr}
     .hero{padding:150px 0 70px}
     section.block{padding:108px 0}
@@ -1091,7 +1091,6 @@
             <div class="svc-row" data-svc="Gros SUV"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Gros SUV</span><span class="svc-mdl">Tahoe · Jeep G.C.</span></div><div class="svc-types"><button type="button" class="svc-t" data-t="Int.">Int.</button><button type="button" class="svc-t" data-t="Ext.">Ext.</button><button type="button" class="svc-t" data-t="Complet">Complet</button></div></div>
             <div class="svc-row" data-svc="Gros 4×4"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Gros 4×4</span><span class="svc-mdl">Silverado</span></div><div class="svc-types"><button type="button" class="svc-t" data-t="Int.">Int.</button><button type="button" class="svc-t" data-t="Ext.">Ext.</button><button type="button" class="svc-t" data-t="Complet">Complet</button></div></div>
             <div class="svc-glabel" style="margin-top:4px;">— Location</div>
-            <div class="svc-row" data-svc="Mitsubishi Mirage"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Mitsubishi Mirage</span><span class="svc-mdl">Citadine</span></div></div>
             <div class="svc-row" data-svc="Kia Picanto"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Kia Picanto</span><span class="svc-mdl">Citadine</span></div></div>
           </div>
           <span class="err" id="svc-err" style="display:none;">Choisissez au moins un service.</span>
@@ -1176,8 +1175,7 @@
 
   /* ---------- vehicle data (small curated fleet) ---------- */
   var VEHICLES = [
-    {name:"Mitsubishi Mirage", catLabel:"Citadine", sub:"Légère, idéale en ville",  price:"–", euro:"–", seats:5, bags:2, trans:"Manuelle", img:"mirage.jpg"},
-    {name:"Kia Picanto",       catLabel:"Citadine", sub:"Sportive &amp; maniable", price:"–", euro:"–", seats:5, bags:2, trans:"Auto",     img:"picanto.jpg"}
+    {name:"Kia Picanto", catLabel:"Citadine", sub:"Sportive &amp; maniable", price:"–", euro:"–", seats:5, bags:2, trans:"Auto", img:"picanto.jpg"}
   ];
 
   function carSVG(body, paint){
