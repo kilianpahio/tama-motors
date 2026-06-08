@@ -1176,8 +1176,8 @@
 
   /* ---------- vehicle data (small curated fleet) ---------- */
   var VEHICLES = [
-    {name:"Mitsubishi Mirage", catLabel:"Citadine", sub:"Légère, idéale en ville",  price:"–", euro:"–", seats:5, bags:2, trans:"Manuelle", body:"mirage",  paint:"#c8c9c7"},
-    {name:"Kia Picanto",       catLabel:"Citadine", sub:"Sportive &amp; maniable", price:"–", euro:"–", seats:5, bags:2, trans:"Auto",     body:"picanto", paint:"#3a3a40"}
+    {name:"Mitsubishi Mirage", catLabel:"Citadine", sub:"Légère, idéale en ville",  price:"–", euro:"–", seats:5, bags:2, trans:"Manuelle", img:"mirage.jpg"},
+    {name:"Kia Picanto",       catLabel:"Citadine", sub:"Sportive &amp; maniable", price:"–", euro:"–", seats:5, bags:2, trans:"Auto",     img:"picanto.jpg"}
   ];
 
   function carSVG(body, paint){
@@ -1290,11 +1290,9 @@
       var card = document.createElement("article");
       card.className = "vcard reveal in";
       card.innerHTML =
-        '<div class="vcard-media">'+
-          '<div class="topo"></div><div class="glow-floor"></div>'+
+        '<div class="vcard-media" style="background:#0e0e10;">'+
           '<span class="vcat">'+v.catLabel+'</span>'+
-          carSVG(v.body, v.paint)+
-          '<span class="vph-tag">[ photo véhicule ]</span>'+
+          '<img src="Image/'+v.img+'" alt="'+v.name+'" style="width:100%;height:100%;object-fit:cover;display:block;">'+
         '</div>'+
         '<div class="vcard-body">'+
           '<div class="vcard-top">'+
