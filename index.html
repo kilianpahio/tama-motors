@@ -422,6 +422,22 @@
   }
   .spec svg{width:14px;height:14px;opacity:.85}
   .vcard .btn{justify-content:center;width:100%;padding:14px}
+  .vtiers{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+  .vtier{text-align:center;padding:10px 6px;border-radius:8px;background:var(--bg-2);border:1px solid var(--line)}
+  .vtier-lbl{display:block;font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+  .vtier-val{display:block;font-family:"Archivo";font-weight:800;font-size:14px}
+  .vtier-val small{font-size:9px;font-weight:600;opacity:.65}
+  .vtier.vtier-best{border-color:rgba(242,182,71,.4);background:rgba(242,182,71,.06)}
+  .vtier.vtier-best .vtier-val{color:var(--gold)}
+  @media(max-width:480px){.vtiers{grid-template-columns:repeat(2,1fr)}}
+  .loc-info{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;margin-top:32px}
+  .loc-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .li-block{display:flex;flex-direction:column;gap:10px}
+  .li-title{display:flex;align-items:center;gap:8px;font-family:"Archivo";font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+  .li-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px}
+  .li-list li{font-size:14px;color:var(--muted-2)}
+  .li-list li::before{content:"·";color:var(--gold);font-weight:900;margin-right:6px}
+  @media(max-width:600px){.loc-info-grid{grid-template-columns:1fr}}
 
   /* ===================== CONTACT ===================== */
   .contact-grid{display:grid;grid-template-columns:1fr;gap:30px}
@@ -838,6 +854,16 @@
       <span class="wn-sep"></span>
       <span class="wn-item">Utilitaires : <b>sur devis</b></span>
     </div>
+    <div class="wash-note reveal" style="margin-top:12px">
+      <span class="wn-lead" style="display:flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Horaires</span>
+      <span class="wn-item">Mar – Ven <b>8h00 – 16h30</b></span>
+      <span class="wn-sep"></span>
+      <span class="wn-item">Samedi <b>8h00 – 15h00</b></span>
+      <span class="wn-sep"></span>
+      <span class="wn-item">Dim &amp; Lun <b>Fermé</b></span>
+      <span class="wn-sep"></span>
+      <span class="wn-item">Paiement <b>Espèces · Carte</b></span>
+    </div>
     <div class="reveal" style="display:flex;align-items:center;gap:16px;margin-top:40px;flex-wrap:wrap;">
       <span style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);">Suivre Tama Car Wash</span>
       <div style="display:flex;gap:10px;">
@@ -989,7 +1015,26 @@
     </div>
 
     <div class="fleet" id="fleet"><!-- cards injected by JS --></div>
-    <div class="reveal" style="display:flex;align-items:center;gap:16px;margin-top:40px;flex-wrap:wrap;">
+    <div class="loc-info reveal">
+      <div class="loc-info-grid">
+        <div class="li-block">
+          <span class="li-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Conditions de location</span>
+          <ul class="li-list">
+            <li>Âge minimum : <b>23 ans</b></li>
+            <li>Permis de conduire : <b>2 ans minimum</b></li>
+            <li>Caution : <b>10 000 XPF</b></li>
+          </ul>
+        </div>
+        <div class="li-block">
+          <span class="li-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Paiement</span>
+          <ul class="li-list">
+            <li>Règlement par <b>carte bancaire uniquement</b></li>
+            <li>Espèces <b>non acceptées</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="display:flex;align-items:center;gap:16px;margin-top:32px;flex-wrap:wrap;">
       <span style="font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);">Suivre Tama Location</span>
       <div style="display:flex;gap:10px;">
         <a href="https://www.facebook.com/profile.php?id=61583589092530" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;padding:9px 18px;border:1px solid var(--line-2);border-radius:99px;font-size:13px;font-weight:600;transition:all .3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--line-2)';this.style.color='inherit'"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook</a>
@@ -1092,7 +1137,7 @@
             <div class="svc-row" data-svc="Gros SUV"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Gros SUV</span><span class="svc-mdl">Tahoe · Jeep G.C.</span></div><div class="svc-types"><button type="button" class="svc-t" data-t="Int.">Int.</button><button type="button" class="svc-t" data-t="Ext.">Ext.</button><button type="button" class="svc-t" data-t="Complet">Complet</button></div></div>
             <div class="svc-row" data-svc="Gros 4×4"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Gros 4×4</span><span class="svc-mdl">Silverado</span></div><div class="svc-types"><button type="button" class="svc-t" data-t="Int.">Int.</button><button type="button" class="svc-t" data-t="Ext.">Ext.</button><button type="button" class="svc-t" data-t="Complet">Complet</button></div></div>
             <div class="svc-glabel" style="margin-top:4px;">— Location</div>
-            <div class="svc-row" data-svc="Kia Picanto"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Kia Picanto</span><span class="svc-mdl">Citadine</span></div></div>
+            <div class="svc-row" data-svc="Mitsubishi Space Star"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Mitsubishi Space Star</span><span class="svc-mdl">Citadine</span></div></div>
           </div>
           <span class="err" id="svc-err" style="display:none;">Choisissez au moins un service.</span>
         </div>
@@ -1176,7 +1221,8 @@
 
   /* ---------- vehicle data (small curated fleet) ---------- */
   var VEHICLES = [
-    {name:"Kia Picanto", catLabel:"Citadine", sub:"Sportive &amp; maniable", price:"–", euro:"–", seats:5, bags:2, trans:"Auto", img:"picanto.jpg"}
+    {name:"Mitsubishi Space Star", catLabel:"Citadine", sub:"Économique &amp; manœuvrable", seats:5, bags:2, trans:"Manuel", img:"space-star.jpg",
+     prices:[{label:"1–2 jours",val:"6 000"},{label:"3+ jours",val:"5 500"},{label:"7+ jours",val:"5 000"},{label:"Au mois",val:"4 500"}]}
   ];
 
   function carSVG(body, paint){
@@ -1288,6 +1334,9 @@
     VEHICLES.forEach(function(v){
       var card = document.createElement("article");
       card.className = "vcard reveal in";
+      var priceBlock = v.prices
+        ? '<div class="vtiers">'+v.prices.map(function(p,i){return '<div class="vtier'+(i===v.prices.length-1?' vtier-best':'')+'"><span class="vtier-lbl">'+p.label+'</span><span class="vtier-val">'+p.val+' <small>XPF/j</small></span></div>';}).join('')+'</div>'
+        : '<div class="vprice"><div class="amt">'+v.price+' <small>XPF</small></div><div class="per">/ jour</div></div>';
       card.innerHTML =
         '<div class="vcard-media" style="background:#0e0e10;">'+
           '<span class="vcat">'+v.catLabel+'</span>'+
@@ -1296,8 +1345,8 @@
         '<div class="vcard-body">'+
           '<div class="vcard-top">'+
             '<div><h3>'+v.name+'</h3><div class="sub">'+v.sub+'</div></div>'+
-            '<div class="vprice">'+(v.price==="–"?'<div class="amt" style="font-size:15px;letter-spacing:0">À définir</div><div class="per">Tarif sur demande</div>':'<div class="amt">'+v.price+' <small>XPF</small></div><div class="per">/ jour · ~'+v.euro+'</div>')+'</div>'+
           '</div>'+
+          priceBlock+
           '<div class="vspecs">'+
             '<span class="spec">'+seatIcon+v.seats+' places</span>'+
             '<span class="spec">'+bagIcon+v.bags+' bagages</span>'+
