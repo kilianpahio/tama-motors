@@ -1153,7 +1153,7 @@
         </button>
         <div class="form-ok" id="formOk">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
-          <span>Māuruuru ! Demande envoyée — nous revenons vers vous très vite.</span>
+          <span>Māuruuru ! WhatsApp va s'ouvrir — envoyez le message pour finaliser votre demande.</span>
         </div>
       </form>
     </div>
@@ -1481,6 +1481,12 @@
       ok=false;
     }
     if(!ok){ var fe=form.querySelector(".invalid input,.invalid textarea"); if(fe) fe.focus(); return; }
+    var waMsg = "Nouvelle demande — Tama Motors\n\n"
+      + "Nom : " + document.getElementById("f-name").value.trim() + "\n"
+      + "Email : " + document.getElementById("f-email").value.trim() + "\n"
+      + "Service : " + svcHidden.value + "\n"
+      + "Message : " + document.getElementById("f-msg").value.trim();
+    window.open("https://wa.me/68989502202?text=" + encodeURIComponent(waMsg), "_blank");
     document.getElementById("formOk").classList.add("show");
     form.querySelector('button[type="submit"]').style.display = "none";
     setTimeout(function(){ document.getElementById("formOk").scrollIntoView({block:"nearest"}); }, 60);
