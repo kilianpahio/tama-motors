@@ -1437,6 +1437,10 @@
 
   function prefill(service){
     var name=service.replace(/^(Lavage|Location)\s*[—-]\s*/,"");
+    document.querySelectorAll(".svc-row").forEach(function(r){
+      r.classList.remove("on");
+      r.querySelectorAll(".svc-t").forEach(function(t){t.classList.remove("on");});
+    });
     var row=document.querySelector('.svc-row[data-svc="'+name+'"]');
     if(row){ row.classList.add("on"); updateSvc(); document.getElementById("svc-field").classList.remove("is-error"); }
     document.getElementById("contact").scrollIntoView({behavior:"smooth", block:"start"});
