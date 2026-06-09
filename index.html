@@ -1062,6 +1062,14 @@
   .svc-t.on{background:var(--grad-gold);color:#1a1305;border-color:transparent;opacity:1!important}
   #svc-field.is-error .svc-picker{box-shadow:0 0 0 3px rgba(224,88,79,.14);border-radius:12px;outline:1px solid #e0584f}
   @media(max-width:480px){.svc-mdl{display:none}.svc-t{padding:4px 7px;font-size:10px}}
+  .dur-picker{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+  .dur-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg-2);cursor:pointer;transition:all .2s;font-family:inherit;width:100%}
+  .dur-lbl{font-size:13px;font-weight:700;color:var(--muted-2)}
+  .dur-price{font-size:10px;color:var(--muted);font-weight:600}
+  .dur-btn.on{border-color:rgba(242,182,71,.5);background:rgba(242,182,71,.08)}
+  .dur-btn.on .dur-lbl{color:var(--gold)}
+  .dur-btn.on .dur-price{color:var(--gold);opacity:.8}
+  @media(max-width:480px){.dur-picker{grid-template-columns:repeat(2,1fr)}}
 </style>
 
 <!-- ===================== CONTACT ===================== -->
@@ -1141,6 +1149,17 @@
             <div class="svc-row" data-svc="Mitsubishi Space Star"><div class="svc-main"><span class="svc-chk"></span><span class="svc-nm">Mitsubishi Space Star</span><span class="svc-mdl">Citadine</span></div></div>
           </div>
           <span class="err" id="svc-err" style="display:none;">Choisissez au moins un service.</span>
+        </div>
+        <div class="field" id="duration-field" style="display:none">
+          <label>Durée de location <span class="req">*</span></label>
+          <div class="dur-picker">
+            <button type="button" class="dur-btn" data-dur="1–2 jours"><span class="dur-lbl">1–2 jours</span><span class="dur-price">6 000 XPF/j</span></button>
+            <button type="button" class="dur-btn" data-dur="3–6 jours"><span class="dur-lbl">3–6 jours</span><span class="dur-price">5 500 XPF/j</span></button>
+            <button type="button" class="dur-btn" data-dur="7+ jours"><span class="dur-lbl">7+ jours</span><span class="dur-price">5 000 XPF/j</span></button>
+            <button type="button" class="dur-btn" data-dur="Au mois"><span class="dur-lbl">Au mois</span><span class="dur-price">4 500 XPF/j</span></button>
+          </div>
+          <input type="hidden" id="durationHidden" name="duration" />
+          <span class="err" id="dur-err" style="display:none">Choisissez une durée.</span>
         </div>
         <div class="field">
           <label for="f-msg">Message <span class="req">*</span></label>
@@ -1371,7 +1390,22 @@
       vals.push(nm+(t?" — "+t.getAttribute("data-t"):""));
     });
     svcHidden.value=vals.join(" | ");
+    var hasLoc = svcHidden.value.indexOf("Mitsubishi Space Star") !== -1;
+    var durField = document.getElementById("duration-field");
+    durField.style.display = hasLoc ? "" : "none";
+    if(!hasLoc){
+      document.getElementById("durationHidden").value = "";
+      document.querySelectorAll(".dur-btn").forEach(function(b){ b.classList.remove("on"); });
+    }
   }
+  document.querySelectorAll(".dur-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll(".dur-btn").forEach(function(b){ b.classList.remove("on"); });
+      btn.classList.add("on");
+      document.getElementById("durationHidden").value = btn.getAttribute("data-dur");
+      document.getElementById("dur-err").style.display = "none";
+    });
+  });
   document.querySelectorAll(".svc-row").forEach(function(row){
     var main=row.querySelector(".svc-main");
     var types=row.querySelectorAll(".svc-t");
@@ -1479,11 +1513,17 @@
       document.getElementById("svc-err").style.display="block";
       ok=false;
     }
+    var dur = document.getElementById("durationHidden").value;
+    if(svcHidden.value.indexOf("Mitsubishi Space Star") !== -1 && !dur){
+      document.getElementById("dur-err").style.display="block";
+      ok=false;
+    }
     if(!ok){ var fe=form.querySelector(".invalid input,.invalid textarea"); if(fe) fe.focus(); return; }
     var waMsg = "Nouvelle demande — Tama Motors\n\n"
       + "Nom : " + document.getElementById("f-name").value.trim() + "\n"
       + "Téléphone : " + document.getElementById("f-email").value.trim() + "\n"
       + "Service : " + svcHidden.value + "\n"
+      + (dur ? "Durée : " + dur + "\n" : "")
       + "Message : " + document.getElementById("f-msg").value.trim();
     window.open("https://wa.me/33615158531?text=" + encodeURIComponent(waMsg), "_blank");
     document.getElementById("formOk").classList.add("show");
