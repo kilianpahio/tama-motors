@@ -1119,9 +1119,9 @@
             <span class="err">Merci d'indiquer votre nom.</span>
           </div>
           <div class="field">
-            <label for="f-email">Email <span class="req">*</span></label>
-            <input id="f-email" name="email" type="email" placeholder="vous@exemple.pf" required />
-            <span class="err">Email invalide.</span>
+            <label for="f-email">Téléphone / WhatsApp <span class="req">*</span></label>
+            <input id="f-email" name="phone" type="tel" placeholder="+689 XX XX XX XX" required />
+            <span class="err">Numéro invalide.</span>
           </div>
         </div>
         <div class="field" id="svc-field">
@@ -1462,12 +1462,11 @@
 
   /* ---------- form validation ---------- */
   var form = document.getElementById("contactForm");
-  function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
   form.addEventListener("submit", function(e){
     e.preventDefault();
     var ok = true;
     [["f-name",function(v){return v.trim().length>1;}],
-     ["f-email",validEmail],
+     ["f-email",function(v){return v.trim().length>4;}],
      ["f-msg",function(v){return v.trim().length>3;}]
     ].forEach(function(pair){
       var el = document.getElementById(pair[0]);
@@ -1483,7 +1482,7 @@
     if(!ok){ var fe=form.querySelector(".invalid input,.invalid textarea"); if(fe) fe.focus(); return; }
     var waMsg = "Nouvelle demande — Tama Motors\n\n"
       + "Nom : " + document.getElementById("f-name").value.trim() + "\n"
-      + "Email : " + document.getElementById("f-email").value.trim() + "\n"
+      + "Téléphone : " + document.getElementById("f-email").value.trim() + "\n"
       + "Service : " + svcHidden.value + "\n"
       + "Message : " + document.getElementById("f-msg").value.trim();
     window.open("https://wa.me/33615158531?text=" + encodeURIComponent(waMsg), "_blank");
