@@ -1539,11 +1539,16 @@
 
   function buildMessage(){
     var dur = document.getElementById("durationHidden").value;
+    var items = svcHidden.value.split("|").map(function(s){return s.trim();}).filter(Boolean);
+    var washItems = items.filter(function(s){return s.indexOf("Mitsubishi Space Star")===-1;});
+    var locItems = items.filter(function(s){return s.indexOf("Mitsubishi Space Star")!==-1;});
+    var serviceLines = "";
+    if(washItems.length) serviceLines += "Car Wash : " + washItems.join(", ") + "\n";
+    if(locItems.length) serviceLines += "Location : Mitsubishi Space Star" + (dur ? " (" + dur + ")" : "") + "\n";
     return "Nouvelle demande — Tama Motors\n\n"
       + "Nom : " + document.getElementById("f-name").value.trim() + "\n"
       + "Téléphone : " + document.getElementById("f-email").value.trim() + "\n"
-      + "Service : " + svcHidden.value + "\n"
-      + (dur ? "Durée : " + dur + "\n" : "")
+      + serviceLines
       + "Message : " + document.getElementById("f-msg").value.trim();
   }
 
